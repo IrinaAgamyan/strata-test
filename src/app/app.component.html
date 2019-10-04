@@ -1,0 +1,58 @@
+<form>
+  <div class="form-group form-inline d-flex justify-content-end p-3">
+    Search by country: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm" />
+  </div>
+  <ngx-datatable
+    #countriesTable
+    [rows]="countries$ | async"
+    columnMode="force"
+    [footerHeight]="50"
+    rowHeight="auto"
+    [limit]="10">
+    <!-- Row Detail Template -->
+    <ngx-datatable-row-detail rowHeight="auto">
+      <ng-template let-row="row" ngx-datatable-row-detail-template>
+        <div>
+          <div>Continent:
+            {{ row.continent.name }} ({{ row.continent.code }})
+          </div>
+          <div>Languages:
+            <span *ngFor="let language of row.languages; last as isLast">
+              {{ language.name }} ({{ language.native }})<span *ngIf="!isLast">, </span>
+            </span>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-row-detail>
+
+    <ngx-datatable-column name="Code">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div (click)="toggleExpandRow(row)">{{ row.code }}</div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Name">
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+        <div (click)="toggleExpandRow(row)">
+          <ngb-highlight [result]="row.name" [term]="service.searchTerm"></ngb-highlight>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Native Name">
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+        <div (click)="toggleExpandRow(row)">
+          <ngb-highlight [result]="row.native" [term]="service.searchTerm"></ngb-highlight>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Phone">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div (click)="toggleExpandRow(row)">{{ row.phone }}</div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Currency" width="270">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div (click)="toggleExpandRow(row)">{{row.currency}}</div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</form>

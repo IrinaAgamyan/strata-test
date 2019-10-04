@@ -1,0 +1,57 @@
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap-grid";
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+::ng-deep {
+  .ngx-datatable {
+    padding: 15px;
+
+    .datatable-header {
+      font-weight: bold;
+      .datatable-row-center > .datatable-header-cell:nth-child(1) {
+        width: 70px !important;
+      }
+    }
+
+    .datatable-body-row {
+      cursor: pointer;
+      border-bottom: 1px #f3f2f7 solid;
+      padding: 5px;
+
+      &.datatable-row-even {
+        background-color: #f5f8fb;
+      }
+
+      &.datatable-row-odd {
+        background-color: #ebf0f7;
+      }
+    }
+
+    .datatable-row-detail {
+      padding: 10px 20px;
+    }
+
+    .datatable-row-group > datatable-body-cell:nth-child(1) {
+      width: 70px !important;
+    }
+
+    .datatable-footer {
+      font-weight: bold;
+    }
+
+    .datatable-pager {
+      .pages {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        &.active {
+          border-radius: 2px;
+          background: #e6f0ff;
+        }
+      }
+    }
+  }
+}
